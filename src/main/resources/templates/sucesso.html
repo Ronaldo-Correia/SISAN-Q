@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="pt-BR" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Envio Realizado | Projetos IFBA</title>
+  <link rel="stylesheet" th:href="@{/css/sucesso.css}" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<header>
+  <nav>
+    <div class="container">
+      <ul class="nav-list">
+        <li><a href="/"><i class="fas fa-home"></i> Página Inicial</a></li>
+        <li><a href="/sobre"><i class="fas fa-info-circle"></i> Sobre o Projeto</a></li>
+      </ul>
+    </div>
+  </nav>
+</header>
+
+<main>
+  <section class="success-section">
+    <div class="container">
+      <div class="success-card">
+        <div class="success-icon">
+          <svg viewBox="0 0 24 24">
+            <path fill="currentColor" d="M12 2C6.5 2 2 6.5 2 12S6.5 22 12 22 22 17.5 22 12 17.5 2 12 2M10 17L5 12L6.41 10.59L10 14.17L17.59 6.58L19 8L10 17Z" />
+          </svg>
+        </div>
+        <h1>Questionário enviado com sucesso!</h1>
+        <p class="success-message">Obrigado por sua valiosa contribuição! Seu questionário foi recebido e será fundamental para nossas pesquisas sobre segurança alimentar.</p>
+
+        <div class="success-details">
+          <div class="detail-item">
+            <i class="fas fa-check-circle"></i>
+            <span>Seus dados estão seguros</span>
+          </div>
+          <div class="detail-item">
+            <i class="fas fa-chart-line"></i>
+            <span>Contribuindo para pesquisas importantes</span>
+          </div>
+        </div>
+
+        <div class="action-buttons">
+          <a href="/" class="btn primary-btn">
+            <i class="fas fa-home"></i> Voltar à Página Inicial
+          </a>
+          <a href="/questionario" class="btn secondary-btn">
+            <i class="fas fa-plus-circle"></i> Enviar Outro Questionário
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="appreciation-section">
+    <div class="container">
+      <h2>Nosso Agradecimento</h2>
+      <p>Sua participação faz a diferença! Juntos estamos construindo um futuro com melhor segurança alimentar para nossa comunidade.</p>
+      <div class="social-share">
+        <p>Compartilhe esta iniciativa:</p>
+        <div class="social-icons">
+          <a href="#"><i class="fab fa-facebook"></i></a>
+          <a href="#"><i class="fab fa-twitter"></i></a>
+          <a href="#"><i class="fab fa-whatsapp"></i></a>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="container">
+    <div class="footer-content">
+      <div class="footer-logo">
+        <img th:src="@{/images/ifba-logo.png}" alt="IFBA Logo" class="logo">
+        <p>Instituto Federal de Educação, Ciência e Tecnologia da Bahia</p>
+      </div>
+      <div class="footer-links">
+        <a href="/privacidade">Política de Privacidade</a>
+        <a href="/termos">Termos de Uso</a>
+        <a href="/contato">Contato</a>
+      </div>
+    </div>
+    <p class="copyright">&copy; 2025 Projetos IFBA. Todos os direitos reservados.</p>
+  </div>
+</footer>
+
+<!-- Font Awesome para ícones -->
+<script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+</body>
+</html>

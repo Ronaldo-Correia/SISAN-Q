@@ -1,0 +1,82 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sobre o Projeto | Projetos IFBA</title>
+    <link rel="stylesheet" th:href="@{/css/sucesso.css}" />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<header>
+    <nav>
+        <div class="container">
+            <ul class="nav-list">
+                <li><a href="/"><i class="fas fa-home"></i> Página Inicial</a></li>
+                <li><a href="/sobre"><i class="fas fa-info-circle"></i> Sobre o Projeto</a></li>
+            </ul>
+        </div>
+    </nav>
+</header>
+
+<main>
+    <section class="success-section">
+        <div class="container">
+            <div class="success-card">
+                <h1>Sobre o Projeto</h1>
+                <p class="success-message">
+                    Este projeto foi desenvolvido no âmbito do Instituto Federal da Bahia (IFBA) com o objetivo de analisar a segurança alimentar da população local por meio da coleta e análise de dados via questionários.
+                </p>
+                <div class="success-details">
+                    <div class="detail-item">
+                        <i class="fas fa-users"></i>
+                        <span>Equipe multidisciplinar de professores e alunos</span>
+                    </div>
+                    <div class="detail-item">
+                        <i class="fas fa-bullseye"></i>
+                        <span>Foco em políticas públicas e ações sociais</span>
+                    </div>
+                </div>
+                <div class="action-buttons">
+                    <a href="/questionario" class="btn primary-btn">
+                        <i class="fas fa-pen"></i> Responder Questionário
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="appreciation-section">
+        <div class="container">
+            <h2>Objetivos do Projeto</h2>
+            <p>Nosso objetivo é entender melhor os fatores que contribuem para a insegurança alimentar e propor soluções eficazes que possam ser implementadas nas comunidades.</p>
+            <br>
+            <h2>Importância da sua participação</h2>
+            <p>Cada questionário preenchido representa uma história, um desafio e uma oportunidade de melhoria. Sua contribuição é essencial para construirmos um panorama real e transformador.</p>
+        </div>
+    </section>
+</main>
+
+<footer>
+    <div class="container">
+        <div class="footer-content">
+            <div class="footer-logo">
+                <img th:src="@{/images/ifba-logo.png}" alt="IFBA Logo" class="logo">
+                <p>Instituto Federal de Educação, Ciência e Tecnologia da Bahia</p>
+            </div>
+            <div class="footer-links">
+                <a href="/privacidade">Política de Privacidade</a>
+                <a href="/termos">Termos de Uso</a>
+                <a href="/contato">Contato</a>
+            </div>
+        </div>
+        <p class="copyright">&copy; 2025 Projetos IFBA. Todos os direitos reservados.</p>
+    </div>
+</footer>
+
+<!-- Font Awesome para ícones -->
+<script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+</body>
+</html>

@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Redefinir Senha - Projetos IFBA</title>
+  <link rel="stylesheet" th:href="@{/css/redefinir-senha.css}" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+    /* Ajustes adicionais */
+    .recuperar-senha-card {
+      padding: 2rem;
+    }
+    .form-group {
+      margin-bottom: 1.5rem;
+    }
+    .password-input {
+      position: relative;
+    }
+    .toggle-password {
+      position: absolute;
+      right: 10px;
+      top: 50%;
+      transform: translateY(-50%);
+      background: none;
+      border: none;
+      cursor: pointer;
+      color: #666;
+    }
+    .full-width {
+      width: 100%;
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <nav>
+    <div class="container">
+      <div class="logo">
+        <img th:src="@{/images/ifba-logo.png}" alt="IFBA Logo">
+      </div>
+      <ul class="nav-list">
+        <li><a href="/"><i class="fas fa-home"></i> Página Inicial</a></li>
+        <li><a href="/relatorios"><i class="fas fa-chart-bar"></i> Relatórios</a></li>
+        <li><a href="/sobre"><i class="fas fa-info-circle"></i> Sobre</a></li>
+      </ul>
+      <div class="auth-buttons">
+        <a href="/login" class="btn outline-btn"><i class="fas fa-sign-in-alt"></i> Login</a>
+        <a href="/cadastro" class="btn primary-btn"><i class="fas fa-user-plus"></i> Cadastre-se</a>
+      </div>
+    </div>
+  </nav>
+</header>
+
+<main class="recuperar-senha-main">
+  <div class="container">
+    <div class="recuperar-senha-grid">
+      <div class="recuperar-senha-intro">
+        <h1>Redefina sua senha</h1>
+        <p>Proteja sua conta com uma nova senha segura.</p>
+
+        <div class="benefits-list">
+          <div class="benefit-item">
+            <i class="fas fa-shield-alt"></i>
+            <span>Segurança garantida</span>
+          </div>
+          <div class="benefit-item">
+            <i class="fas fa-lock"></i>
+            <span>Processo criptografado</span>
+          </div>
+          <div class="benefit-item">
+            <i class="fas fa-clock"></i>
+            <span>Alteração imediata</span>
+          </div>
+        </div>
+
+        <div class="recuperar-senha-image">
+          <img th:src="@{/images/password-reset.svg}" alt="Ilustração de redefinição de senha">
+        </div>
+      </div>
+
+      <div class="recuperar-senha-card">
+        <div class="card-header">
+          <h2><i class="fas fa-key"></i> Redefinir Senha</h2>
+          <p>Digite seu e-mail e a nova senha</p>
+        </div>
+
+        <form th:action="@{/redefinir-senha}" method="POST" class="recuperar-senha-form">
+          <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+
+          <!-- Mensagens de feedback -->
+          <div th:if="${param.success}" class="alert alert-success">
+            <i class="fas fa-check-circle"></i>
+            <span>Senha alterada com sucesso!</span>
+          </div>
+
+          <div th:if="${param.error}" class="alert alert-error">
+            <i class="fas fa-exclamation-circle"></i>
+            <span th:text="${param.error}"></span>
+          </div>
+
+          <!-- Campo de e-mail -->
+          <div class="form-group">
+            <label for="email"><i class="fas fa-envelope"></i> E-mail cadastrado</label>
+            <input
+                    type="email"
+                    id="email"
+                    name="email"
+                    class="full-width"
+                    placeholder="seu@email.com"
+                    required
+            />
+          </div>
+
+          <!-- Campo de nova senha -->
+          <div class="form-group">
+            <label for="novaSenha"><i class="fas fa-lock"></i> Nova senha</label>
+            <div class="password-input">
+              <input
+                      type="password"
+                      id="novaSenha"
+                      name="novaSenha"
+                      class="full-width"
+                      placeholder="Mínimo 8 caracteres"
+                      minlength="8"
+                      required
+              />
+              <button type="button" class="toggle-password">
+                <i class="fas fa-eye"></i>
+              </button>
+            </div>
+            <small class="form-text">Mínimo de 8 caracteres</small>
+          </div>
+
+          <!-- Campo de confirmação -->
+          <div class="form-group">
+            <label for="confirmarSenha"><i class="fas fa-lock"></i> Confirmar senha</label>
+            <div class="password-input">
+              <input
+                      type="password"
+                      id="confirmarSenha"
+                      name="confirmarSenha"
+                      class="full-width"
+                      placeholder="Repita a senha"
+                      required
+              />
+              <button type="button" class="toggle-password">
+                <i class="fas fa-eye"></i>
+              </button>
+            </div>
+          </div>
+
+          <button type="submit" class="btn primary-btn full-width">
+            <i class="fas fa-save"></i> Salvar nova senha
+          </button>
+
+          <div class="text-center mt-3">
+            <a href="/login" class="back-to-login">
+              <i class="fas fa-arrow-left"></i> Voltar para o login
+            </a>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</main>
+
+<footer>
+  <div class="container">
+    <div class="footer-content">
+      <div class="footer-logo">
+        <img th:src="@{/images/ifba-logo-white.png}" alt="IFBA Logo" class="logo">
+        <p>Instituto Federal de Educação, Ciência e Tecnologia da Bahia</p>
+      </div>
+      <div class="footer-links">
+        <a href="/privacidade">Política de Privacidade</a>
+        <a href="/termos">Termos de Uso</a>
+        <a href="/contato">Contato</a>
+      </div>
+    </div>
+    <p class="copyright">&copy; 2025 Projetos IFBA. Todos os direitos reservados.</p>
+  </div>
+</footer>
+
+<script th:src="@{/js/recuperar-senha.js}"></script>
+<script>
+  // Script para mostrar/esconder senha
+  document.querySelectorAll('.toggle-password').forEach(button => {
+    button.addEventListener('click', function() {
+      const input = this.previousElementSibling;
+      const type = input.getAttribute('type') === 'password' ? 'text' : 'password';
+      input.setAttribute('type', type);
+      this.querySelector('i').classList.toggle('fa-eye-slash');
+    });
+  });
+</script>
+
+</body>
+</html>

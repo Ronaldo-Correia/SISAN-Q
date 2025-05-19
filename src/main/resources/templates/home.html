@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="pt-BR" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Projetos IFBA - Segurança Alimentar</title>
+    <link rel="stylesheet" th:href="@{/css/home.css}" />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+
+<header>
+    <nav>
+        <div class="container">
+            <div class="logo">
+                <img th:src="@{/images/ifba-logo.png}" alt="IFBA Logo">
+            </div>
+            <ul class="nav-list">
+                <li><a href="/" class="active"><i class="fas fa-home"></i> Página Inicial</a></li>
+                <li><a href="/relatorios"><i class="fas fa-chart-bar"></i> Relatórios</a></li>
+                <li><a href="/sobre"><i class="fas fa-info-circle"></i> Sobre</a></li>
+                <li><a href="/contato"><i class="fas fa-envelope"></i> Contato</a></li>
+            </ul>
+            <div class="auth-buttons">
+                <a href="/login" class="btn outline-btn"><i class="fas fa-sign-in-alt"></i> Login</a>
+                <a href="/cadastro" class="btn primary-btn"><i class="fas fa-user-plus"></i> Cadastre-se</a>
+            </div>
+        </div>
+    </nav>
+</header>
+
+<main>
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1>Bem-vindo ao Projetos IFBA</h1>
+                <p class="subtitle">Transformando dados em soluções para segurança alimentar</p>
+                <p class="description">Nosso projeto visa mapear e analisar indicadores de (in)segurança alimentar para desenvolver políticas públicas eficientes.</p>
+
+                <div class="cta-buttons">
+                    <a href="/questionario" class="btn primary-btn large-btn">
+                        <i class="fas fa-clipboard-list"></i> Participar da Pesquisa
+                    </a>
+                    <a href="#features" class="btn secondary-btn large-btn">
+                        <i class="fas fa-search"></i> Saiba Mais
+                    </a>
+                </div>
+            </div>
+            <div class="hero-image">
+                <img th:src="@{/images/food-security.png}" alt="Segurança Alimentar">
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="features">
+        <div class="container">
+            <h2 class="section-title">Como Nossa Plataforma Funciona</h2>
+            <p class="section-subtitle">Coletamos e analisamos dados para combater a insegurança alimentar</p>
+
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-clipboard-check"></i>
+                    </div>
+                    <h3>Questionários</h3>
+                    <p>Coletamos informações através de formulários detalhados sobre hábitos alimentares e condições socioeconômicas.</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <h3>Análise de Dados</h3>
+                    <p>Processamos os dados coletados para identificar padrões e áreas críticas de insegurança alimentar.</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-map-marked-alt"></i>
+                    </div>
+                    <h3>Mapeamento</h3>
+                    <p>Georreferenciamos os resultados para direcionar ações específicas em cada região.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats Section -->
+
+<footer>
+    <div class="container">
+        <div class="footer-grid">
+            <div class="footer-about">
+                <img th:src="@{/images/ifba-logo-white.png}" alt="IFBA Logo" class="footer-logo">
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-facebook"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-linkedin"></i></a>
+                </div>
+            </div>
+
+            <div class="footer-links">
+                <h3>Links Rápidos</h3>
+                <ul>
+                    <li><a href="/">Home</a></li>
+                    <li><a href="/relatorios">Relatórios</a></li>
+                    <li><a href="/questionario">Questionário</a></li>
+                    <li><a href="/sobre">Sobre o Projeto</a></li>
+                    <li><a href="/contato">Contato</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-contact">
+                <h3>Contato</h3>
+                <p><i class="fas fa-map-marker-alt"></i> R. Viriato Lôbo, s/n - Cajueiro, Santo Antônio de Jesus - BA, 44571-020</p>
+                <p><i class="fas fa-phone"></i> (71) 3221-0394</p>
+                <p><i class="fas fa-envelope"></i> 20241TADSSAJ0031@ifba.edu.br</p>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <p>&copy; 2025 Projetos IFBA. Todos os direitos reservados.</p>
+            <div class="legal-links">
+                <a href="/privacidade">Política de Privacidade</a>
+                <a href="/termos">Termos de Uso</a>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<script th:src="@{/js/home.js}"></script>
+</body>
+</html>

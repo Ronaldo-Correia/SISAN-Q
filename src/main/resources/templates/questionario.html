@@ -1,0 +1,659 @@
+<!DOCTYPE html>
+<html lang="pt-br" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Questionário - Projetos IFBA</title>
+    <link rel="stylesheet" th:href="@{/css/questionario.css}" />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+
+<header>
+    <nav>
+        <div class="container">
+            <div class="logo">
+                <img th:src="@{/images/ifba-logo.png}" alt="IFBA Logo">
+            </div>
+            <ul class="nav-list">
+                <li><a href="/"><i class="fas fa-home"></i> Página Inicial</a></li>
+                <li><a href="/relatorios"><i class="fas fa-chart-bar"></i> Relatórios</a></li>
+                <li><a href="/sobre"><i class="fas fa-info-circle"></i> Sobre</a></li>
+            </ul>
+        </div>
+    </nav>
+</header>
+
+<main class="questionario-container">
+    <div class="container">
+        <div class="questionario-header">
+            <h1><i class="fas fa-clipboard-list"></i> Questionário de Segurança Alimentar</h1>
+            <p>Preencha todas as seções para contribuir com nossa pesquisa</p>
+
+            <div class="progress-container">
+                <div class="progress-bar">
+                    <div class="progress" id="progressBar"></div>
+                </div>
+                <span id="progressText">1 de 3 seções</span>
+            </div>
+        </div>
+
+        <form id="formulariocompleto" method="post" th:object="${avaliacaoDTO}" action="/questionario">
+            <!-- Seção 1: Questionário Socioeconômico -->
+            <section id="divinicial" class="section active">
+                <div class="section-header">
+                    <h2><i class="fas fa-user-circle"></i> 1. Dados Socioeconômicos</h2>
+                    <p>Informações básicas para análise demográfica</p>
+                </div>
+
+                <div class="form-card">
+                    <fieldset>
+                        <legend class="form-legend">Dados Pessoais</legend>
+
+                        <!-- Pergunta 1: Nome -->
+                        <div class="form-group">
+                            <label for="nome">Nome completo</label>
+                            <input type="text" id="nome" name="questionario.nome" placeholder="Digite seu nome completo" required />
+                        </div>
+
+                        <!-- Pergunta 2: Idade -->
+                        <div class="form-group">
+                            <label for="idade">Idade</label>
+                            <input type="number" id="idade" name="questionario.idade" placeholder="Digite sua idade" min="2" max="120" required />
+                        </div>
+
+                        <!-- Pergunta 3: Gênero -->
+                        <div class="form-group">
+                            <label>Gênero</label>
+                            <div class="radio-group">
+                                <div class="radio-option">
+                                    <input type="radio" value="MASCULINO" id="p3a" name="questionario.genero" required />
+                                    <label for="p3a"><i class="fas fa-mars"></i> Masculino</label>
+                                </div>
+                                <div class="radio-option">
+                                    <input type="radio" value="FEMININO" id="p3b" name="questionario.genero" required />
+                                    <label for="p3b"><i class="fas fa-venus"></i> Feminino</label>
+                                </div>
+                                <div class="radio-option">
+                                    <input type="radio" value="TRANSGENERO" id="p3c" name="questionario.genero" required />
+                                    <label for="p3c"><i class="fas fa-transgender"></i> Transgênero</label>
+                                </div>
+                                <div class="radio-option">
+                                    <input type="radio" value="NAO_BINARIO" id="p3d" name="questionario.genero" required />
+                                    <label for="p3d"><i class="fas fa-genderless"></i> Não binário</label>
+                                </div>
+                                <div class="radio-option other-option">
+                                    <input type="radio" value="OUTRO" id="p3e" name="questionario.genero" />
+                                    <label for="p3e">Outro:</label>
+                                    <input type="text" id="p3e-text" name="questionario.generoOutro" placeholder="Especifique" />
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Pergunta 4: Raça/Cor -->
+                        <div class="form-group">
+                            <label>Raça/Cor</label>
+                            <div class="radio-group">
+                                <div class="radio-option">
+                                    <input type="radio" value="BRANCO" id="p4a" name="questionario.racaCor" required />
+                                    <label for="p4a">Branco</label>
+                                </div>
+                                <div class="radio-option">
+                                    <input type="radio" value="PRETO" id="p4b" name="questionario.racaCor" required />
+                                    <label for="p4b">Preto</label>
+                                </div>
+                                <div class="radio-option">
+                                    <input type="radio" value="PARDO" id="p4c" name="questionario.racaCor" required />
+                                    <label for="p4c">Pardo</label>
+                                </div>
+                                <div class="radio-option">
+                                    <input type="radio" value="POVOS_ORIGINARIOS" id="p4d" name="questionario.racaCor" required />
+                                    <label for="p4d">Povos originários</label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Pergunta 5: Escolaridade -->
+                        <div class="form-group">
+                            <label>Escolaridade</label>
+                            <div class="radio-group">
+                                <div class="radio-option">
+                                    <input type="radio" value="ENSINO_FUNDAMENTAL_INCOMPLETO" id="p5e" name="questionario.escolaridade" required />
+                                    <label for="p5e">Ensino fundamental incompleto</label>
+                                </div>
+                                <div class="radio-option">
+                                    <input type="radio" value="ENSINO_FUNDAMENTAL_COMPLETO" id="p5f" name="questionario.escolaridade" required />
+                                    <label for="p5f">Ensino fundamental completo</label>
+                                </div>
+                                <div class="radio-option">
+                                    <input type="radio" value="ENSINO_MEDIO_INCOMPLETO" id="p5a" name="questionario.escolaridade" required />
+                                    <label for="p5a">Ensino médio incompleto</label>
+                                </div>
+                                <div class="radio-option">
+                                    <input type="radio" value="ENSINO_MEDIO_COMPLETO" id="p5b" name="questionario.escolaridade" required />
+                                    <label for="p5b">Ensino médio completo</label>
+                                </div>
+                                <div class="radio-option">
+                                    <input type="radio" value="GRADUACAO_INCOMPLETA" id="p5c" name="questionario.escolaridade" required />
+                                    <label for="p5c">Graduação incompleta</label>
+                                </div>
+                                <div class="radio-option">
+                                    <input type="radio" value="GRADUACAO_COMPLETA" id="p5d" name="questionario.escolaridade" required />
+                                    <label for="p5d">Graduação completa</label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Pergunta 6: Estado Civil -->
+                        <div class="form-group">
+                            <label>Estado civil</label>
+                            <div class="radio-group">
+                                <div class="radio-option">
+                                    <input type="radio" value="SOLTEIRO" id="p6e" name="questionario.estadoCivil" required />
+                                    <label for="p6e">Solteiro</label>
+                                </div>
+                                <div class="radio-option">
+                                    <input type="radio" value="CASADO" id="p6a" name="questionario.estadoCivil" required />
+                                    <label for="p6a">Casado</label>
+                                </div>
+                                <div class="radio-option">
+                                    <input type="radio" value="VIUVO" id="p6b" name="questionario.estadoCivil" required />
+                                    <label for="p6b">Viúvo</label>
+                                </div>
+                                <div class="radio-option">
+                                    <input type="radio" value="DIVORCIADO" id="p6c" name="questionario.estadoCivil" required />
+                                    <label for="p6c">Divorciado</label>
+                                </div>
+                                <div class="radio-option">
+                                    <input type="radio" value="SEPARADO" id="p6d" name="questionario.estadoCivil" required />
+                                    <label for="p6d">Separado</label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Pergunta 7: Emprego -->
+                        <div class="form-group">
+                            <label>Situação de emprego</label>
+                            <div class="radio-group">
+                                <div class="radio-option">
+                                    <input type="radio" value="TRABALHANDO" id="p7e" name="questionario.emprego" required />
+                                    <label for="p7e">Trabalhando</label>
+                                </div>
+                                <div class="radio-option">
+                                    <input type="radio" value="MEIO_PERIODO" id="p7a" name="questionario.emprego" required />
+                                    <label for="p7a">Meio período</label>
+                                </div>
+                                <div class="radio-option">
+                                    <input type="radio" value="DESEMPREGADO" id="p7b" name="questionario.emprego" required />
+                                    <label for="p7b">Desempregado</label>
+                                </div>
+                                <div class="radio-option">
+                                    <input type="radio" value="APOSENTADO" id="p7d" name="questionario.emprego" required />
+                                    <label for="p7d">Aposentado</label>
+                                </div>
+                                <div class="radio-option">
+                                    <input type="radio" value="INCAPAZ_TRABALHAR" id="p7c" name="questionario.emprego" required />
+                                    <label for="p7c">Incapaz de trabalhar</label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Pergunta 8: Auxílios -->
+                        <div class="form-group">
+                            <label>Recebe algum auxílio governamental?</label>
+                            <div class="radio-group">
+                                <div class="radio-option">
+                                    <input type="radio" value="BOLSA_FAMILIA" id="p8a" name="questionario.auxilios" required />
+                                    <label for="p8a">Bolsa Família</label>
+                                </div>
+                                <div class="radio-option">
+                                    <input type="radio" value="AUXILIO_EMERGENCIAL" id="p8b" name="questionario.auxilios" required />
+                                    <label for="p8b">Auxílio Emergencial</label>
+                                </div>
+                                <div class="radio-option">
+                                    <input type="radio" value="VALE_GAS" id="p8c" name="questionario.auxilios" required />
+                                    <label for="p8c">Vale Gás</label>
+                                </div>
+                                <div class="radio-option">
+                                    <input type="radio" value="BPC" id="p8d" name="questionario.auxilios" required />
+                                    <label for="p8d">BPC</label>
+                                </div>
+                                <div class="radio-option other-option">
+                                    <input type="radio" value="OUTRO" id="p8e" name="questionario.auxilios" />
+                                    <label for="p8e">Outros:</label>
+                                    <input type="text" id="p8e-text" name="questionario.auxiliosOutro" placeholder="Especifique" />
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Pergunta 9: Família e dependentes -->
+                        <div class="form-group">
+                            <label>Quantos dependentes você possui?</label>
+                            <div class="radio-group grid-3">
+                                <div class="radio-option">
+                                    <input type="radio" value="NENHUM" id="p9a" name="questionario.dependentes" required />
+                                    <label for="p9a">Nenhum</label>
+                                </div>
+                                <div class="radio-option">
+                                    <input type="radio" value="UM" id="p9b" name="questionario.dependentes" required />
+                                    <label for="p9b">1</label>
+                                </div>
+                                <div class="radio-option">
+                                    <input type="radio" value="DOIS" id="p9c" name="questionario.dependentes" required />
+                                    <label for="p9c">2</label>
+                                </div>
+                                <div class="radio-option">
+                                    <input type="radio" value="TRES" id="p9d" name="questionario.dependentes" required />
+                                    <label for="p9d">3</label>
+                                </div>
+                                <div class="radio-option">
+                                    <input type="radio" value="QUATRO" id="p9e" name="questionario.dependentes" required />
+                                    <label for="p9e">4</label>
+                                </div>
+                                <div class="radio-option">
+                                    <input type="radio" value="CINCO_OU_MAIS" id="p9f" name="questionario.dependentes" required />
+                                    <label for="p9f">5 ou mais</label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Pergunta 10: Religião -->
+                        <div class="form-group">
+                            <label>Religião</label>
+                            <div class="radio-group">
+                                <div class="radio-option">
+                                    <input type="radio" value="CATOLICO" id="p10a" name="questionario.religiao" required />
+                                    <label for="p10a">Católico</label>
+                                </div>
+                                <div class="radio-option">
+                                    <input type="radio" value="EVANGELICO" id="p10b" name="questionario.religiao" required />
+                                    <label for="p10b">Evangélico</label>
+                                </div>
+                                <div class="radio-option">
+                                    <input type="radio" value="ESPIRITA" id="p10e" name="questionario.religiao" required />
+                                    <label for="p10e">Espírita</label>
+                                </div>
+                                <div class="radio-option">
+                                    <input type="radio" value="UMBANDA" id="p10d" name="questionario.religiao" required />
+                                    <label for="p10d">Umbanda</label>
+                                </div>
+                                <div class="radio-option">
+                                    <input type="radio" value="CANDOMBLE" id="p10c" name="questionario.religiao" required />
+                                    <label for="p10c">Candomblé</label>
+                                </div>
+                                <div class="radio-option">
+                                    <input type="radio" value="NENHUMA" id="p10f" name="questionario.religiao" required />
+                                    <label for="p10f">Nenhuma</label>
+                                </div>
+                            </div>
+                        </div>
+                    </fieldset>
+                </div>
+
+            </section>
+
+            <!-- Seção 2: Consumo Alimentar -->
+            <section id="divsecundaria" class="section">
+                <div class="section-header">
+                    <h2><i class="fas fa-utensils"></i> 2. Hábitos Alimentares</h2>
+                    <p>Informações sobre seu consumo diário de alimentos</p>
+                </div>
+
+                <div class="form-card">
+                    <fieldset>
+                        <!-- Pergunta 11 -->
+                        <div class="form-group">
+                            <label>Você tem o costume de fazer refeições mexendo no computador ou celular?</label>
+                            <div class="radio-group">
+                                <div class="radio-option">
+                                    <input type="radio" value="SIM" id="p11a" name="consumo.usoDispositivosRefeicao" required />
+                                    <label for="p11a">Sim</label>
+                                </div>
+                                <div class="radio-option">
+                                    <input type="radio" value="NAO" id="p11b" name="consumo.usoDispositivosRefeicao" required />
+                                    <label for="p11b">Não</label>
+                                </div>
+                                <div class="radio-option">
+                                    <input type="radio" value="NAO_SEI" id="p11c" name="consumo.usoDispositivosRefeicao" required />
+                                    <label for="p11c">Não sei</label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Pergunta 12 -->
+                        <div class="form-group">
+                            <label>Quais refeições você faz ao longo do dia?</label>
+                            <div class="radio-group grid-2">
+                                <div class="radio-option">
+                                    <input type="radio" value="CAFE_DA_MANHA" id="p12a" name="consumo.refeicoes" required />
+                                    <label for="p12a"><i class="fas fa-coffee"></i> Café da Manhã</label>
+                                </div>
+                                <div class="radio-option">
+                                    <input type="radio" value="LANCHE_DA_MANHA" id="p12b" name="consumo.refeicoes" required />
+                                    <label for="p12b"><i class="fas fa-apple-alt"></i> Lanche da Manhã</label>
+                                </div>
+                                <div class="radio-option">
+                                    <input type="radio" value="ALMOCO" id="p12c" name="consumo.refeicoes" required />
+                                    <label for="p12c"><i class="fas fa-drumstick-bite"></i> Almoço</label>
+                                </div>
+                                <div class="radio-option">
+                                    <input type="radio" value="LANCHE_DA_TARDE" id="p12d" name="consumo.refeicoes" required />
+                                    <label for="p12d"><i class="fas fa-bread-slice"></i> Lanche da Tarde</label>
+                                </div>
+                                <div class="radio-option">
+                                    <input type="radio" value="JANTAR" id="p12e" name="consumo.refeicoes" required />
+                                    <label for="p12e"><i class="fas fa-fish"></i> Jantar</label>
+                                </div>
+                                <div class="radio-option">
+                                    <input type="radio" value="CEIA" id="p12f" name="consumo.refeicoes" required />
+                                    <label for="p12f"><i class="fas fa-moon"></i> Ceia</label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Perguntas 13 a 19: Consumo (Tabela) -->
+                        <div class="form-group">
+                            <label>Ontem, você consumiu:</label>
+                            <div class="consumo-table">
+                                <div class="table-header">
+                                    <div class="table-cell">Alimento</div>
+                                    <div class="table-cell">Sim</div>
+                                    <div class="table-cell">Não</div>
+                                </div>
+
+                                <!-- Pergunta 13 -->
+                                <div class="table-row">
+                                    <div class="table-cell">Feijão</div>
+                                    <div class="table-cell">
+                                        <input type="radio" value="true" id="p13a" name="consumo.ConsumoDiaAnterior.feijao" required />
+                                        <label for="p13a"></label>
+                                    </div>
+                                    <div class="table-cell">
+                                        <input type="radio" value="false" id="p13b" name="consumo.ConsumoDiaAnterior.feijao" required />
+                                        <label for="p13b"></label>
+                                    </div>
+                                </div>
+
+                                <!-- Pergunta 14 -->
+                                <div class="table-row">
+                                    <div class="table-cell">Frutas frescas (não considerar suco)</div>
+                                    <div class="table-cell">
+                                        <input type="radio" value="true" id="p14a" name="consumo.ConsumoDiaAnterior.frutasFrescas" required />
+                                        <label for="p14a"></label>
+                                    </div>
+                                    <div class="table-cell">
+                                        <input type="radio" value="false" id="p14b" name="consumo.ConsumoDiaAnterior.frutasFrescas" required />
+                                        <label for="p14b"></label>
+                                    </div>
+                                </div>
+
+                                <!-- Pergunta 15 -->
+                                <div class="table-row">
+                                    <div class="table-cell">Verduras/Legumes</div>
+                                    <div class="table-cell">
+                                        <input type="radio" value="true" id="p15a" name="consumo.ConsumoDiaAnterior.verdurasLegumes" required />
+                                        <label for="p15a"></label>
+                                    </div>
+                                    <div class="table-cell">
+                                        <input type="radio" value="false" id="p15b" name="consumo.ConsumoDiaAnterior.verdurasLegumes" required />
+                                        <label for="p15b"></label>
+                                    </div>
+                                </div>
+
+                                <!-- Pergunta 16 -->
+                                <div class="table-row">
+                                    <div class="table-cell">Hambúrguer/Embutidos</div>
+                                    <div class="table-cell">
+                                        <input type="radio" value="true" id="p16a" name="consumo.ConsumoDiaAnterior.hamburguerEmbutidos" required />
+                                        <label for="p16a"></label>
+                                    </div>
+                                    <div class="table-cell">
+                                        <input type="radio" value="false" id="p16b" name="consumo.ConsumoDiaAnterior.hamburguerEmbutidos" required />
+                                        <label for="p16b"></label>
+                                    </div>
+                                </div>
+
+                                <!-- Pergunta 17 -->
+                                <div class="table-row">
+                                    <div class="table-cell">Bebidas adoçadas</div>
+                                    <div class="table-cell">
+                                        <input type="radio" value="true" id="p17a" name="consumo.ConsumoDiaAnterior.bebidasAdocadas" required />
+                                        <label for="p17a"></label>
+                                    </div>
+                                    <div class="table-cell">
+                                        <input type="radio" value="false" id="p17b" name="consumo.ConsumoDiaAnterior.bebidasAdocadas" required />
+                                        <label for="p17b"></label>
+                                    </div>
+                                </div>
+
+                                <!-- Pergunta 18 -->
+                                <div class="table-row">
+                                    <div class="table-cell">Macarrão instantâneo/salgadinhos</div>
+                                    <div class="table-cell">
+                                        <input type="radio" value="true" id="p18a" name="consumo.ConsumoDiaAnterior.industrializadosSalgados" required />
+                                        <label for="p18a"></label>
+                                    </div>
+                                    <div class="table-cell">
+                                        <input type="radio" value="false" id="p18b" name="consumo.ConsumoDiaAnterior.industrializadosSalgados" required />
+                                        <label for="p18b"></label>
+                                    </div>
+                                </div>
+
+                                <!-- Pergunta 19 -->
+                                <div class="table-row">
+                                    <div class="table-cell">Biscoitos doces/recheados</div>
+                                    <div class="table-cell">
+                                        <input type="radio" value="true" id="p19a" name="consumo.ConsumoDiaAnterior.docesGuloseimas" required />
+                                        <label for="p19a"></label>
+                                    </div>
+                                    <div class="table-cell">
+                                        <input type="radio" value="false" id="p19b" name="consumo.ConsumoDiaAnterior.docesGuloseimas" required />
+                                        <label for="p19b"></label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </fieldset>
+                </div>
+
+                <div class="form-navigation">
+                </div>
+            </section>
+
+            <!-- Seção 3: Escala Brasileira de Insegurança Alimentar (EBIA) -->
+            <section id="divterciaria" class="section">
+                <div class="section-header">
+                    <h2><i class="fas fa-shield-alt"></i> 3. Escala de Insegurança Alimentar (EBIA)</h2>
+                    <p>Pesquisa Nacional sobre Segurança Alimentar no Contexto da Pandemia de COVID-19</p>
+                </div>
+
+                <div class="form-card">
+                    <fieldset>
+                        <div class="form-group">
+                            <p class="ebia-info">Por favor, responda às seguintes perguntas considerando os últimos 3 meses:</p>
+
+                            <div class="ebia-questions">
+                                <!-- Pergunta 20 -->
+                                <div class="ebia-question">
+                                    <p>1. Nos últimos três meses, houve preocupação de que os alimentos acabassem?</p>
+                                    <div class="radio-group horizontal">
+                                        <div class="radio-option">
+                                            <input type="radio" value="SIM" id="p20a" name="ebia.respostas[1]" required />
+                                            <label for="p20a">Sim</label>
+                                        </div>
+                                        <div class="radio-option">
+                                            <input type="radio" value="NAO" id="p20b" name="ebia.respostas[1]" required />
+                                            <label for="p20b">Não</label>
+                                        </div>
+                                        <div class="radio-option">
+                                            <input type="radio" value="NAO_SABE" id="p20c" name="ebia.respostas[1]" required />
+                                            <label for="p20c">Não sei</label>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Pergunta 21 -->
+                                <div class="ebia-question">
+                                    <p>2. Os alimentos acabaram antes de comprar mais?</p>
+                                    <div class="radio-group horizontal">
+                                        <div class="radio-option">
+                                            <input type="radio" value="SIM" id="p21a" name="ebia.respostas[2]" required />
+                                            <label for="p21a">Sim</label>
+                                        </div>
+                                        <div class="radio-option">
+                                            <input type="radio" value="NAO" id="p21b" name="ebia.respostas[2]" required />
+                                            <label for="p21b">Não</label>
+                                        </div>
+                                        <div class="radio-option">
+                                            <input type="radio" value="NAO_SABE" id="p21c" name="ebia.respostas[2]" required />
+                                            <label for="p21c">Não sei</label>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Pergunta 22 -->
+                                <div class="ebia-question">
+                                    <p>3. Ficaram sem dinheiro para uma alimentação saudável?</p>
+                                    <div class="radio-group horizontal">
+                                        <div class="radio-option">
+                                            <input type="radio" value="SIM" id="p22a" name="ebia.respostas[3]" required />
+                                            <label for="p22a">Sim</label>
+                                        </div>
+                                        <div class="radio-option">
+                                            <input type="radio" value="NAO" id="p22b" name="ebia.respostas[3]" required />
+                                            <label for="p22b">Não</label>
+                                        </div>
+                                        <div class="radio-option">
+                                            <input type="radio" value="NAO_SABE" id="p22c" name="ebia.respostas[3]" required />
+                                            <label for="p22c">Não sei</label>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Pergunta 23 -->
+                                <div class="ebia-question">
+                                    <p>4. Comeram poucos tipos de alimentos por falta de dinheiro?</p>
+                                    <div class="radio-group horizontal">
+                                        <div class="radio-option">
+                                            <input type="radio" value="SIM" id="p23a" name="ebia.respostas[4]" required />
+                                            <label for="p23a">Sim</label>
+                                        </div>
+                                        <div class="radio-option">
+                                            <input type="radio" value="NAO" id="p23b" name="ebia.respostas[4]" required />
+                                            <label for="p23b">Não</label>
+                                        </div>
+                                        <div class="radio-option">
+                                            <input type="radio" value="NAO_SABE" id="p23c" name="ebia.respostas[4]" required />
+                                            <label for="p23c">Não sei</label>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Pergunta 24 -->
+                                <div class="ebia-question">
+                                    <p>5. Alguém deixou de se alimentar por falta de dinheiro?</p>
+                                    <div class="radio-group horizontal">
+                                        <div class="radio-option">
+                                            <input type="radio" value="SIM" id="p24a" name="ebia.respostas[5]" required />
+                                            <label for="p24a">Sim</label>
+                                        </div>
+                                        <div class="radio-option">
+                                            <input type="radio" value="NAO" id="p24b" name="ebia.respostas[5]" required />
+                                            <label for="p24b">Não</label>
+                                        </div>
+                                        <div class="radio-option">
+                                            <input type="radio" value="NAO_SABE" id="p24c" name="ebia.respostas[5]" required />
+                                            <label for="p24c">Não sei</label>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Pergunta 25 -->
+                                <div class="ebia-question">
+                                    <p>6. Alguém comeu menos do que devia por falta de dinheiro?</p>
+                                    <div class="radio-group horizontal">
+                                        <div class="radio-option">
+                                            <input type="radio" value="SIM" id="p25a" name="ebia.respostas[6]" required />
+                                            <label for="p25a">Sim</label>
+                                        </div>
+                                        <div class="radio-option">
+                                            <input type="radio" value="NAO" id="p25b" name="ebia.respostas[6]" required />
+                                            <label for="p25b">Não</label>
+                                        </div>
+                                        <div class="radio-option">
+                                            <input type="radio" value="NAO_SABE" id="p25c" name="ebia.respostas[6]" required />
+                                            <label for="p25c">Não sei</label>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Pergunta 26 -->
+                                <div class="ebia-question">
+                                    <p>7. Alguém sentiu fome e não comeu por falta de dinheiro?</p>
+                                    <div class="radio-group horizontal">
+                                        <div class="radio-option">
+                                            <input type="radio" value="SIM" id="p26a" name="ebia.respostas[7]" required />
+                                            <label for="p26a">Sim</label>
+                                        </div>
+                                        <div class="radio-option">
+                                            <input type="radio" value="NAO" id="p26b" name="ebia.respostas[7]" required />
+                                            <label for="p26b">Não</label>
+                                        </div>
+                                        <div class="radio-option">
+                                            <input type="radio" value="NAO_SABE" id="p26c" name="ebia.respostas[7]" required />
+                                            <label for="p26c">Não sei</label>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Pergunta 27 -->
+                                <div class="ebia-question">
+                                    <p>8. Alguém fez apenas uma refeição ou ficou um dia inteiro sem comer?</p>
+                                    <div class="radio-group horizontal">
+                                        <div class="radio-option">
+                                            <input type="radio" value="SIM" id="p27a" name="ebia.respostas[8]" required />
+                                            <label for="p27a">Sim</label>
+                                        </div>
+                                        <div class="radio-option">
+                                            <input type="radio" value="NAO" id="p27b" name="ebia.respostas[8]" required />
+                                            <label for="p27b">Não</label>
+                                        </div>
+                                        <div class="radio-option">
+                                            <input type="radio" value="NAO_SABE" id="p27c" name="ebia.respostas[8]" required />
+                                            <label for="p27c">Não sei</label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </fieldset>
+                </div>
+
+                <div class="form-navigation">
+                    <button type="submit" class="btn primary-btn">
+                        <i class="fas fa-paper-plane"></i> Enviar Questionário
+                    </button>
+                </div>
+            </section>
+        </form>
+    </div>
+</main>
+
+<footer>
+    <div class="container">
+        <div class="footer-content">
+            <div class="footer-logo">
+                <img th:src="@{/images/ifba-logo-white.png}" alt="IFBA Logo" class="logo">
+                <p>Instituto Federal de Educação, Ciência e Tecnologia da Bahia</p>
+            </div>
+            <div class="footer-links">
+                <a href="/privacidade">Política de Privacidade</a>
+                <a href="/termos">Termos de Uso</a>
+                <a href="/contato">Contato</a>
+            </div>
+        </div>
+        <p class="copyright">© 2025 Projetos IFBA. Todos os direitos reservados.</p>
+    </div>
+
+</footer><script th:src="@{/js/questionario.js}"></script></body> </html>

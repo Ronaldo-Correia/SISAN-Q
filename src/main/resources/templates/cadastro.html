@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="pt-BR" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Cadastro - Projetos IFBA</title>
+    <link rel="stylesheet" th:href="@{/css/cadastro.css}" />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+
+<header>
+    <nav>
+        <div class="container">
+            <div class="logo">
+                <img th:src="@{/images/ifba-logo.png}" alt="IFBA Logo">
+            </div>
+            <ul class="nav-list">
+                <li><a href="/"><i class="fas fa-home"></i> Página Inicial</a></li>
+                <li><a href="/relatorios"><i class="fas fa-chart-bar"></i> Relatórios</a></li>
+                <li><a href="/sobre"><i class="fas fa-info-circle"></i> Sobre</a></li>
+            </ul>
+            <div class="auth-buttons">
+                <a href="/login" class="btn outline-btn"><i class="fas fa-sign-in-alt"></i> Login</a>
+                <a href="/cadastro" class="btn primary-btn active"><i class="fas fa-user-plus"></i> Cadastre-se</a>
+            </div>
+        </div>
+    </nav>
+</header>
+
+<main class="cadastro-main">
+    <div class="container">
+        <div class="cadastro-grid">
+            <div class="cadastro-intro">
+                <h1>Junte-se a nós!</h1>
+                <p>Crie sua conta e comece a contribuir com nossos projetos de segurança alimentar.</p>
+
+                <div class="benefits-list">
+                    <div class="benefit-item">
+                        <i class="fas fa-check-circle"></i>
+                        <span>Acesso a todos os questionários</span>
+                    </div>
+                    <div class="benefit-item">
+                        <i class="fas fa-check-circle"></i>
+                        <span>Visualize seus relatórios</span>
+                    </div>
+                    <div class="benefit-item">
+                        <i class="fas fa-check-circle"></i>
+                        <span>Receba atualizações por e-mail</span>
+                    </div>
+                    <div class="benefit-item">
+                        <i class="fas fa-check-circle"></i>
+                        <span>Participe de pesquisas exclusivas</span>
+                    </div>
+                </div>
+
+                <div class="cadastro-image">
+                    <img th:src="@{/images/signup-illustration.svg}" alt="Ilustração de cadastro">
+                </div>
+            </div>
+
+            <div class="cadastro-card">
+                <div class="card-header">
+                    <h2><i class="fas fa-user-plus"></i> Criar nova conta</h2>
+                    <p>Preencha os campos abaixo para se registrar</p>
+                </div>
+
+                <form action="/register" method="POST" class="cadastro-form">
+                    <!-- Mensagens de erro/sucesso -->
+                    <div th:if="${param.error}" class="alert alert-error">
+                        <i class="fas fa-exclamation-circle"></i>
+                        <span th:text="${param.error}">Erro no cadastro</span>
+                    </div>
+
+                    <div th:if="${param.success}" class="alert alert-success">
+                        <i class="fas fa-check-circle"></i>
+                        <span>Cadastro realizado com sucesso!</span>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="nome"><i class="fas fa-user"></i> Nome completo</label>
+                        <input
+                                type="text"
+                                id="nome"
+                                name="nome"
+                                placeholder="Digite seu nome completo"
+                                required
+                                th:value="${nome != null} ? ${nome} : ''"
+                        />
+                    </div>
+
+                    <div class="form-group">
+                        <label for="email"><i class="fas fa-envelope"></i> E-mail</label>
+                        <input
+                                type="email"
+                                id="email"
+                                name="email"
+                                placeholder="Digite seu e-mail"
+                                required
+                                th:value="${email != null} ? ${email} : ''"
+                        />
+                    </div>
+
+                    <div class="form-group">
+                        <label for="senha"><i class="fas fa-lock"></i> Senha</label>
+                        <div class="password-input">
+                            <input
+                                    type="password"
+                                    id="senha"
+                                    name="senha"
+                                    placeholder="Crie uma senha segura"
+                                    required
+                                    minlength="6"
+                            />
+                            <button type="button" class="toggle-password">
+                                <i class="fas fa-eye"></i>
+                            </button>
+                        </div>
+                        <div class="password-strength">
+                            <div class="strength-bar">
+                                <div class="strength-bar-fill"></div>
+                            </div>
+                            <span class="strength-text">Fraca</span>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="confirmarSenha"><i class="fas fa-lock"></i> Confirmar senha</label>
+                        <div class="password-input">
+                            <input
+                                    type="password"
+                                    id="confirmarSenha"
+                                    name="confirmarSenha"
+                                    placeholder="Repita sua senha"
+                                    required
+                            />
+                            <button type="button" class="toggle-password">
+                                <i class="fas fa-eye"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="form-options">
+                        <div class="terms-agreement">
+                            <input type="checkbox" id="terms" name="terms" required>
+                            <label for="terms">Eu concordo com os <a href="/termos">Termos de Serviço</a> e <a href="/privacidade">Política de Privacidade</a></label>
+                        </div>
+                    </div>
+
+                    <button type="/login" class="btn primary-btn full-width">
+                        <i class="fas fa-user-plus"></i> Criar conta
+                    </button>
+
+                    <div class="divider">
+                        <span>ou</span>
+                    </div>
+
+                    <a href="/login" class="btn secondary-btn full-width">
+                        <i class="fas fa-sign-in-alt"></i> Já tenho uma conta
+                    </a>
+                </form>
+            </div>
+        </div>
+    </div>
+</main>
+
+<footer>
+    <div class="container">
+        <div class="footer-content">
+            <div class="footer-logo">
+                <img th:src="@{/images/ifba-logo-white.png}" alt="IFBA Logo" class="logo">
+                <p>Instituto Federal de Educação, Ciência e Tecnologia da Bahia</p>
+            </div>
+            <div class="footer-links">
+                <a href="/privacidade">Política de Privacidade</a>
+                <a href="/termos">Termos de Uso</a>
+                <a href="/contato">Contato</a>
+            </div>
+        </div>
+        <p class="copyright">&copy; 2025 Projetos IFBA. Todos os direitos reservados.</p>
+    </div>
+</footer>
+
+<script th:src="@{/js/cadastro.js}"></script>
+</body>
+</html>

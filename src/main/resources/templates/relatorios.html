@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dashboard - Dados Reais</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+      background: #f5f5f5;
+    }
+    .section {
+      background: white;
+      border-radius: 8px;
+      padding: 20px;
+      margin-bottom: 30px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      max-width: 1200px;
+      margin: auto;
+    }
+    .charts-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 20px;
+    }
+    .chart-card {
+      background: #fff;
+      border-radius: 8px;
+      padding: 15px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      height: 350px;
+    }
+    .chart-title {
+      font-weight: bold;
+      margin-bottom: 10px;
+      text-align: center;
+    }
+    .chart-wrapper {
+      height: 300px;
+    }
+  </style>
+</head>
+<body>
+<div class="section">
+  <h2>Dashboard - Dados Reais do Banco</h2>
+  <div class="charts-container" id="charts-container">
+    <!-- Gráficos serão adicionados via JavaScript -->
+  </div>
+</div>
+
+<script>
+  const graficosEsperados = [
+    { id: 'generoChart', titulo: 'Distribuição por Gênero', campo: 'distribuicaoGenero' },
+    { id: 'racaChart', titulo: 'Distribuição por Raça/Cor', campo: 'distribuicaoRacaCor' },
+    { id: 'escolaridadeChart', titulo: 'Distribuição por Escolaridade', campo: 'distribuicaoEscolaridade' },
+    { id: 'estadoCivilChart', titulo: 'Estado Civil', campo: 'distribuicaoEstadoCivil' },
+    { id: 'empregoChart', titulo: 'Situação de Emprego', campo: 'distribuicaoEmprego' },
+    { id: 'religiaoChart', titulo: 'Religião', campo: 'distribuicaoReligiao' },
+    { id: 'dependentesChart', titulo: 'Dependentes', campo: 'distribuicaoDependentes' },
+    { id: 'dispositivosChart', titulo: 'Dispositivos nas Refeições', campo: 'distribuicaoUsoDispositivos' },
+    { id: 'faixaEtariaChart', titulo: 'Faixa Etária', campo: 'distribuicaoFaixaEtaria' },
+    { id: 'regiaoChart', titulo: 'Região', campo: 'distribuicaoRegiao' },
+    { id: 'feijaoChart', titulo: 'Consumo de Feijão', campo: 'consumoFeijao' },
+    { id: 'frutasChart', titulo: 'Consumo de Frutas Frescas', campo: 'consumoFrutas' },
+    { id: 'verdurasChart', titulo: 'Consumo de Verduras/Legumes', campo: 'consumoVerduras' },
+    { id: 'embutidosChart', titulo: 'Consumo de Embutidos', campo: 'consumoEmbutidos' },
+    { id: 'bebidasChart', titulo: 'Consumo de Bebidas Adoçadas', campo: 'consumoBebidas' },
+    { id: 'macarraoChart', titulo: 'Consumo de Macarrão Instantâneo', campo: 'consumoMacarrao' },
+    { id: 'guloseimasChart', titulo: 'Consumo de Guloseimas', campo: 'consumoGuloseimas' },
+    { id: 'preocupacaoChart', titulo: 'Preocupação com Alimentos Acabando', campo: 'ebiaPreocupacao' },
+    { id: 'alimentosAcabaramChart', titulo: 'Alimentos Acabaram', campo: 'ebiaAcabaram' },
+    { id: 'alimentacaoSaudavelChart', titulo: 'Sem Dinheiro para Alimentação Saudável', campo: 'ebiaSemDinheiro' },
+    { id: 'poucosAlimentosChart', titulo: 'Poucos Alimentos Disponíveis', campo: 'ebiaPoucos' },
+    { id: 'adultoSemRefeicaoChart', titulo: 'Adulto Sem Refeição', campo: 'ebiaSemRefeicao' },
+    { id: 'adultoFomeChart', titulo: 'Adulto com Fome que Não Comeu', campo: 'ebiaFome' },
+    { id: 'adultoUmaRefeicaoChart', titulo: 'Adulto com 1 Refeição/Dia', campo: 'ebiaUmaRefeicao' },
+    { id: 'insegurancaChart', titulo: 'Classificação de Insegurança Alimentar', campo: 'classificacaoInseguranca' },
+  ];
+
+  const opcoesComuns = {
+    responsive: true,
+    maintainAspectRatio: false,
+    plugins: {
+      legend: { position: 'bottom' },
+      tooltip: {
+        callbacks: {
+          label: function (context) {
+            const label = context.label || '';
+            const value = context.raw || 0;
+            const total = context.dataset.data.reduce((a, b) => a + b, 0);
+            const percentage = total > 0 ? Math.round((value / total) * 100) : 0;
+            return `${label}: ${value} (${percentage}%)`;
+          },
+        },
+      },
+    },
+  };
+
+  function criarElementoGrafico(id, titulo) {
+    const container = document.getElementById('charts-container');
+    const card = document.createElement('div');
+    card.className = 'chart-card';
+    card.innerHTML = `<div class="chart-title">${titulo}</div><div class="chart-wrapper"><canvas id="${id}"></canvas></div>`;
+    container.appendChild(card);
+  }
+
+  function criarGrafico(id, dados) {
+    const labels = Object.keys(dados);
+    const values = Object.values(dados);
+
+    new Chart(document.getElementById(id), {
+      type: 'pie',
+      data: {
+        labels: labels,
+        datasets: [
+          {
+            data: values,
+            backgroundColor: [
+              'rgba(255, 99, 132, 0.7)',
+              'rgba(54, 162, 235, 0.7)',
+              'rgba(255, 206, 86, 0.7)',
+              'rgba(75, 192, 192, 0.7)',
+              'rgba(153, 102, 255, 0.7)',
+              'rgba(255, 159, 64, 0.7)',
+              'rgba(199, 199, 199, 0.7)',
+              'rgba(0, 100, 0, 0.7)',
+            ],
+          },
+        ],
+      },
+      options: opcoesComuns,
+    });
+  }
+
+  function atualizarGraficos(data) {
+    graficosEsperados.forEach((grafico) => {
+      if (data[grafico.campo]) {
+        criarElementoGrafico(grafico.id, grafico.titulo);
+        criarGrafico(grafico.id, data[grafico.campo]);
+      }
+    });
+  }
+
+  fetch('/api/relatorios/dashboard')
+    .then((response) => response.json())
+    .then((data) => atualizarGraficos(data))
+    .catch((error) => console.error('Erro ao carregar os dados do backend:', error));
+</script>
+</body>
+</html>

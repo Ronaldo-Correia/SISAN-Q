@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Entre em contato conosco para tirar dúvidas, enviar sugestões ou solicitar informações">
+    <title>Contato | Nome da Empresa</title>
+    <link rel="stylesheet" href="/css/contato.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
+</head>
+<body>
+<header class="main-header">
+    <div class="container">
+        <nav aria-label="Navegação principal">
+            <ul class="nav-list">
+                <li><a href="/" aria-current="page"><i class="fa-solid fa-house" aria-hidden="true"></i> <span>Início</span></a></li>
+                <li><a href="/sobre"><i class="fa-solid fa-circle-info" aria-hidden="true"></i> <span>Sobre</span></a></li>
+                <li><a href="/contato" class="active"><i class="fa-solid fa-envelope" aria-hidden="true"></i> <span>Contato</span></a></li>
+            </ul>
+        </nav>
+    </div>
+</header>
+
+<main class="main-content">
+    <section class="contato-section" aria-labelledby="contato-titulo">
+        <div class="container">
+            <div class="contato-card">
+                <header class="contato-header">
+                    <h1 id="contato-titulo">Entre em Contato</h1>
+                    <p class="contato-descricao">Preencha o formulário abaixo e nossa equipe entrará em contato o mais breve possível.</p>
+                </header>
+
+                <form id="contato-form" action="/contato/enviar" method="POST" novalidate>
+                    <div class="form-group">
+                        <label for="nome">Nome Completo</label>
+                        <input type="text" id="nome" name="nome" required
+                               placeholder="Digite seu nome completo"
+                               minlength="3" maxlength="100"
+                               aria-required="true">
+                        <span class="error-message" id="nome-error"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="email">E-mail</label>
+                        <input type="email" id="email" name="email" required
+                               placeholder="seu@email.com"
+                               aria-required="true"
+                               pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$">
+                        <span class="error-message" id="email-error"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="assunto">Assunto</label>
+                        <select id="assunto" name="assunto" required aria-required="true">
+                            <option value="" disabled selected>Selecione um assunto</option>
+                            <option value="duvida">Dúvida</option>
+                            <option value="sugestao">Sugestão</option>
+                            <option value="reclamacao">Reclamação</option>
+                            <option value="elogio">Elogio</option>
+                            <option value="outro">Outro</option>
+                        </select>
+                        <span class="error-message" id="assunto-error"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="mensagem">Mensagem</label>
+                        <textarea id="mensagem" name="mensagem" rows="5" required
+                                  placeholder="Escreva sua mensagem aqui..."
+                                  minlength="10" maxlength="1000"
+                                  aria-required="true"></textarea>
+                        <span class="error-message" id="mensagem-error"></span>
+                    </div>
+
+                    <div class="form-actions">
+                        <button type="submit" class="primary-btn">
+                            <i class="fa-solid fa-paper-plane" aria-hidden="true"></i> Enviar Mensagem
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+</main>
+
+<footer class="main-footer">
+    <div class="container">
+        <div class="footer-content">
+            <div class="footer-brand">
+                <a href="/" class="footer-logo">
+                    <img src="/img/logo.png" alt="Logo da Empresa" width="150" height="40">
+                </a>
+                <p class="footer-slogan">Soluções inovadoras para seu negócio</p>
+            </div>
+
+            <nav class="footer-nav" aria-label="Navegação secundária">
+                <ul class="footer-links">
+                    <li><a href="/">Início</a></li>
+                    <li><a href="/sobre">Sobre Nós</a></li>
+                    <li><a href="/contato">Contato</a></li>
+                    <li><a href="/privacidade">Política de Privacidade</a></li>
+                    <li><a href="/termos">Termos de Serviço</a></li>
+                </ul>
+            </nav>
+
+            <div class="footer-contact">
+                <h3 class="footer-title">Contato</h3>
+                <address>
+                    <p><i class="fa-solid fa-envelope" aria-hidden="true"></i> contato@empresa.com</p>
+                    <p><i class="fa-solid fa-phone" aria-hidden="true"></i> (11) 1234-5678</p>
+                </address>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <p class="copyright">&copy; <span id="current-year">2025</span> Nome da Empresa. Todos os direitos reservados.</p>
+            <div class="social-links">
+                <a href="#" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+                <a href="#" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+                <a href="#" aria-label="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<script src="https://kit.fontawesome.com/28e37200a2.js" crossorigin="anonymous"></script>
+<script>
+    // Atualiza o ano do copyright automaticamente
+    document.getElementById('current-year').textContent = new Date().getFullYear();
+
+    // Validação básica do formulário
+    document.getElementById('contato-form').addEventListener('submit', function(e) {
+        let isValid = true;
+
+        // Validação do nome
+        const nome = document.getElementById('nome');
+        if(nome.value.trim().length < 3) {
+            document.getElementById('nome-error').textContent = 'Por favor, insira um nome válido';
+            isValid = false;
+        } else {
+            document.getElementById('nome-error').textContent = '';
+        }
+
+        // Validação do email
+        const email = document.getElementById('email');
+        if(!email.validity.valid) {
+            document.getElementById('email-error').textContent = 'Por favor, insira um e-mail válido';
+            isValid = false;
+        } else {
+            document.getElementById('email-error').textContent = '';
+        }
+
+        // Validação da mensagem
+        const mensagem = document.getElementById('mensagem');
+        if(mensagem.value.trim().length < 10) {
+            document.getElementById('mensagem-error').textContent = 'A mensagem deve ter pelo menos 10 caracteres';
+            isValid = false;
+        } else {
+            document.getElementById('mensagem-error').textContent = '';
+        }
+
+        if(!isValid) {
+            e.preventDefault();
+        }
+    });
+</script>
+</body>
+</html>

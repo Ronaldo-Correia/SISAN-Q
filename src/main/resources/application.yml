@@ -1,0 +1,66 @@
+spring:
+  application:
+    name: libraryapi
+  datasource:
+    url: jdbc:postgresql://localhost:5432/seguranca_alimentar
+    username: postgres
+    password: postgre
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    hibernate:
+      ddl-auto: update
+    defer-datasource-initialization: true
+  sql:
+    init:
+      mode: always
+      data-locations: classpath:data.sql
+      continue-on-error: true
+      platform: postgresql
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: ronaldocorreiacouto@gmail.com
+    password: 6f72b48d0e@
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+        transport:
+          protocol: smtp
+  thymeleaf:
+    enabled: true
+    prefix: classpath:/templates/
+    suffix: .html
+    mode: HTML
+    cache: false
+    encoding: UTF-8
+
+jwt:
+  secret: "bXlTdXBlclNlY3JldEtleVNlY3VyZTU2NzghQCMk"
+  expiration: 86400000
+
+springdoc:
+  swagger-ui:
+    path: /swagger-ui.html
+    tags-sorter: alpha
+    operations-sorter: alpha
+  api-docs:
+    path: /v3/api-docs
+  openapi:
+    info:
+      title: API de Seguranca Alimentar
+      description: Sistema de avaliação de insegurança alimentar
+      version: 1.0.0
+
+logging:
+  level:
+    org:
+      springframework:
+        security: DEBUG
+        web: INFO
+      hibernate: ERROR
+    root: INFO
+server:
+  port: 8082
