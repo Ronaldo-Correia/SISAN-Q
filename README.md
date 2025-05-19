@@ -4,14 +4,14 @@ Este projeto é um sistema web para realização de questionários socioeconômi
 
 🔧 Tecnologias Utilizadas
 
-Java 17/21
-Spring Boot
-JTE (Java Template Engine)
-HTML/CSS
-JavaScript
-Banco de dados PostqreSQL
+*Java 17/21
+*Spring Boot
+*JTE (Java Template Engine)
+*HTML/CSS
+*JavaScript
+*Banco de dados PostqreSQL
 📝 Funcionalidades
 
-Questionário dinâmico 
-Validações de dados nos questionários
-Exibição de dados organizados em relatórios gráficos 
+*Questionário dinâmico 
+*Validações de dados nos questionários
+*Exibição de dados organizados em relatórios gráficos 
